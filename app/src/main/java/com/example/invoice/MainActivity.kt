@@ -1,5 +1,6 @@
 package com.example.invoice
 
+import MyAppNavHost
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,32 +48,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             InvoiceTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    var costomerName by remember {
-//                        mutableStateOf("")
-//                    }
-//                    var item by remember {
-//                        mutableStateOf("")
-//                    }
-//                    var quantity by remember {
-//                        mutableStateOf("")
-//                    }
-//                    var price by remember {
-//                        mutableStateOf("")
-//                    }
-//                    var amount by remember {
-//                        mutableStateOf("")
-//                    }
-//
-//                    val itemList = ItemListData(
-//                        itemName = item,
-//                        itemQuantity = quantity,
-//                        itemPrice = price,
-//                        itemAmount = amount
-//                    )
-//                    val invoicedata = InvoiceData(
-//                        comberName = costomerName,
-//                        itemListData = itemList
-//                    )
+                    MyAppNavHost(
+                        viewModel
+                    )
                 }
             }
         }

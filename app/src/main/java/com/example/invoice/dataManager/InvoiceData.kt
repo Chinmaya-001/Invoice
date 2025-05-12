@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class InvoiceData(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
-    var comberName: String,
+    var customerName: String,
     var itemListData: ItemListData
 )

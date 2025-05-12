@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 class Repository(private val db: Database) {
 
 
-    suspend fun getAllInvoice(): Flow<List<InvoiceData>> {
+    fun getAllInvoice(): Flow<List<InvoiceData>> {
         return db.invoiceDao().getAllInvoice()
     }
 
@@ -36,8 +36,22 @@ class Repository(private val db: Database) {
     }
 
 
-    suspend fun addItemList(itemListData: ItemListData){
-        db.itemListDao().addItemList(itemListData)
+    suspend fun addItem(itemListData: ItemListData){
+        db.itemListDao().addItem(itemListData)
 
     }
+    suspend fun addQty(itemListData: ItemListData){
+        db.itemListDao().addQty(itemListData)
+    }
+
+    suspend fun addPrice(itemListData: ItemListData){
+        db.itemListDao().addPrice(itemListData)
+    }
+
+    suspend fun addAmount(itemListData: ItemListData){
+        db.itemListDao().addAmount(itemListData)
+    }
+
+
+
 }

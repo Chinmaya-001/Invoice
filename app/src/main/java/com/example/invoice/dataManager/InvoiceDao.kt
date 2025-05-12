@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface InvoiceDao {
 
     @Query("SELECT * FROM invoice_table")
-    suspend fun getAllInvoice(): Flow<List<InvoiceData>>
+    fun getAllInvoice(): Flow<List<InvoiceData>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
    suspend fun addInvoice(invoiceData: InvoiceData)

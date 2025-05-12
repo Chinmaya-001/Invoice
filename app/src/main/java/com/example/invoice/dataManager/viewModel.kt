@@ -7,31 +7,56 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class viewModel(private val repository: Repository): ViewModel() {
-     suspend fun getInvoice() = repository.getAllInvoice().asLiveData(viewModelScope.coroutineContext)
+class viewModel(private val repository: Repository) : ViewModel() {
+    fun getInvoice() =
+        repository.getAllInvoice().asLiveData(viewModelScope.coroutineContext)
 
-      fun addInvoice(invoiceData: InvoiceData){
-         viewModelScope.launch {
-              repository.addInvoice(invoiceData)
-         }
+    fun addInvoice(invoiceData: InvoiceData) {
+        viewModelScope.launch {
+            repository.addInvoice(invoiceData)
+        }
 
-     }
-      fun updateInvoice(invoiceData: InvoiceData){
-         viewModelScope.launch {
-              repository.updateInvoice(invoiceData)
-         }
+    }
 
-     }
-     fun deleteInvoice(invoiceData: InvoiceData){
-         viewModelScope.launch {
-              repository.deleteInvoice(invoiceData.id)
-         }
-     }
-     suspend fun getAllItemList() = repository.getAllItemList().asLiveData(viewModelScope.coroutineContext)
+    fun updateInvoice(invoiceData: InvoiceData) {
+        viewModelScope.launch {
+            repository.updateInvoice(invoiceData)
+        }
 
-      fun addItemList(itemListData: ItemListData){
-         viewModelScope.launch {
-              repository.addItemList(itemListData)
-         }
-     }
+    }
+
+    fun deleteInvoice(invoiceData: InvoiceData) {
+        viewModelScope.launch {
+            repository.deleteInvoice(invoiceData.id)
+        }
+    }
+
+    suspend fun getAllItemList() =
+        repository.getAllItemList().asLiveData(viewModelScope.coroutineContext)
+
+    fun addItemList(itemListData: ItemListData) {
+        viewModelScope.launch {
+            repository.addItem(itemListData)
+        }
+    }
+
+    fun addQty(itemListData: ItemListData) {
+        viewModelScope.launch {
+            repository.addQty(itemListData)
+        }
+    }
+
+    fun addPrice(itemListData: ItemListData) {
+        viewModelScope.launch {
+            repository.addPrice(itemListData)
+        }
+    }
+
+
+    fun addAmount(itemListData: ItemListData) {
+        viewModelScope.launch {
+            repository.addAmount(itemListData)
+        }
+    }
+
 }
