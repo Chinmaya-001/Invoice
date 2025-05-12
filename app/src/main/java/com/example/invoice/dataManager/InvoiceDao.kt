@@ -7,19 +7,20 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface InvoiceDao {
 
     @Query("SELECT * FROM invoice_table")
-    fun getAllInvoice(): LiveData<List<InvoiceData>>
+    suspend fun getAllInvoice(): Flow<List<InvoiceData>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addInvoice(invoiceDao: InvoiceDao)
+   suspend fun addInvoice(invoiceData: InvoiceData)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateInvoice(invoiceDao: InvoiceDao)
+    suspend fun updateInvoice(invoiceData: InvoiceData)
 
     @Query("DELETE FROM invoice_table where id = :id")
-    fun deleteInvoice(id : Int)
+    suspend fun deleteInvoice(id : Int)
 }

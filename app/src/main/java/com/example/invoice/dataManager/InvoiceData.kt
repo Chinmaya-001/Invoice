@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "invoice_table")
 data class InvoiceData(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
     var comberName: String,
     var itemListData: ItemListData

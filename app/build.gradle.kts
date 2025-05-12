@@ -65,4 +65,7 @@ dependencies {
 
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$room_version")
+
+    val lifecycle_version = "2.9.0"
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_version}")
 }

@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 @Database(entities = [ItemListData::class, InvoiceData::class], version = 1, exportSchema = false)
-abstract class InvoiceDatabase: RoomDatabase(){
+abstract class Database: RoomDatabase(){
 
     companion object{
         const val DATABASE_NAME = "invoice_database"
