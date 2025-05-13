@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
         Room.databaseBuilder(
             applicationContext,
             Database::class.java,
-            name = "note.db"
+            name = "invoice.db"
         ).build()
     }
     private val viewModel by viewModels<viewModel>(
