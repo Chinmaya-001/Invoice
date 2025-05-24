@@ -10,4 +10,8 @@ class InvoiceRepository(val dao: InvoiceDao) {
         val invoiceId = dao.insertInvoice(invoice).toInt()
         dao.insertItems(items.map { it.copy(invoiceOwnerId = invoiceId) })
     }
+    suspend fun deleteInvoiceWithItems(invoice: Invoice) {
+        dao.deleteItemsByInvoiceId(invoice.invoiceId)
+        dao.deleteInvoice(invoice)
+    }
 }

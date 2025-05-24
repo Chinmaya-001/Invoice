@@ -28,4 +28,11 @@ class InvoiceViewModel(application: Application) : AndroidViewModel(application)
     suspend fun getInvoiceById(id: Int): InvoiceWithItems {
         return repo.dao.getInvoiceWithItems(id)
     }
+
+    fun deleteInvoice(invoice: Invoice) {
+        viewModelScope.launch {
+            repo.deleteInvoiceWithItems(invoice)
+        }
+    }
+
 }
