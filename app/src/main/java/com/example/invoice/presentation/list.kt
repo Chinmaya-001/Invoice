@@ -79,10 +79,13 @@ fun InvoiceCard(
         elevation = CardDefaults.cardElevation()
     ) {
         Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Absolute.SpaceEvenly,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier) {
                 Text("Customer: ${invoiceWithItems.invoice.customerName}")
                 Text("Total: ₹${invoiceWithItems.invoice.totalAmount}")
             }

@@ -14,4 +14,9 @@ class InvoiceRepository(val dao: InvoiceDao) {
         dao.deleteItemsByInvoiceId(invoice.invoiceId)
         dao.deleteInvoice(invoice)
     }
+
+    suspend fun updateInvoiceWithItems(invoice: Invoice, items: List<InvoiceItem>) {
+        dao.updateInvoice(invoice)
+        dao.updateItems(items)
+    }
 }

@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -27,4 +28,10 @@ interface InvoiceDao {
     @Transaction
     @Query("SELECT * FROM invoice WHERE invoiceId = :id")
     suspend fun getInvoiceWithItems(id: Int): InvoiceWithItems
+
+    @Update
+    suspend fun updateInvoice(invoice: Invoice)
+
+    @Update
+    suspend fun updateItems(items: List<InvoiceItem>)
 }

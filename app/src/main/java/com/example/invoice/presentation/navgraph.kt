@@ -29,7 +29,17 @@ fun InvoiceApp(viewModel: InvoiceViewModel = viewModel()) {
             val id = it.arguments?.getInt("invoiceId") ?: 0
             InvoiceDetailScreen(invoiceId = id, viewModel = viewModel, onBack = {
                 navController.popBackStack()
+            },
+                onEdit = {
+                    navController.navigate("edit/$id")
+                })
+        }
+        composable("edit/{invoiceId}", arguments = listOf(navArgument("invoiceId") { type = NavType.IntType })) {
+            val id = it.arguments?.getInt("invoiceId") ?: 0
+            InvoiceEditScreen(invoiceId = id, viewModel = viewModel, onBack = {
+                navController.popBackStack()
             })
         }
+
     }
 }

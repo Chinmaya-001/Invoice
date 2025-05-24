@@ -2,10 +2,13 @@ package com.example.invoice.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,7 +30,7 @@ import com.example.invoice.data.InvoiceWithItems
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InvoiceDetailScreen(invoiceId: Int, viewModel: InvoiceViewModel, onBack: () -> Unit) {
+fun InvoiceDetailScreen(invoiceId: Int, viewModel: InvoiceViewModel, onBack: () -> Unit,onEdit:()-> Unit) {
     var invoiceWithItems by remember { mutableStateOf<InvoiceWithItems?>(null) }
 
     LaunchedEffect(invoiceId) {
@@ -54,9 +57,21 @@ fun InvoiceDetailScreen(invoiceId: Int, viewModel: InvoiceViewModel, onBack: () 
                     Text("${it.itemName}: ${it.itemQuantity} x ₹${it.itemPrice} = ₹${it.itemAmount}")
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = onBack) {
-                    Text("Back")
+                Row (
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth().padding(16.dp)
+                ){
+                    Button(onClick = onBack, modifier = Modifier.weight(0.4f)) {
+                        Text("Back")
+                    }
+                    Spacer(
+                        Modifier.width(8.dp)
+                    )
+                    Button(onClick = onEdit, modifier = Modifier.weight(0.4f)) {
+                        Text("Edit")
+                    }
                 }
+
             }
         }
     }

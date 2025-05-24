@@ -35,4 +35,11 @@ class InvoiceViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+
+    fun updateInvoice(invoice: Invoice, items: List<InvoiceItem>) {
+        viewModelScope.launch {
+            repo.updateInvoiceWithItems(invoice, items)
+        }
+    }
+
 }
