@@ -70,4 +70,6 @@ dependencies {
 
     // Jetpack Compose integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    implementation ("com.itextpdf:itextg:5.5.10")
 }

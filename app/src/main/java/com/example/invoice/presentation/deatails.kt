@@ -21,17 +21,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.invoice.data.InvoiceViewModel
 import com.example.invoice.data.InvoiceWithItems
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InvoiceDetailScreen(invoiceId: Int, viewModel: InvoiceViewModel, onBack: () -> Unit,onEdit:()-> Unit) {
     var invoiceWithItems by remember { mutableStateOf<InvoiceWithItems?>(null) }
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+
 
     LaunchedEffect(invoiceId) {
         invoiceWithItems = viewModel.getInvoiceById(invoiceId)
@@ -70,6 +76,18 @@ fun InvoiceDetailScreen(invoiceId: Int, viewModel: InvoiceViewModel, onBack: () 
                     Button(onClick = onEdit, modifier = Modifier.weight(0.4f)) {
                         Text("Edit")
                     }
+                    Spacer(
+                        Modifier.width(8.dp)
+                    )
+                    Button(onClick = {
+                        coroutineScope.launch {
+                            val invoice = viewModel.getInvoiceById(invoiceId)
+                            createInvoicePdf(context, invoice)
+                        }
+                    }) {
+                        Text("Export as PDF")
+                    }
+
                 }
 
             }

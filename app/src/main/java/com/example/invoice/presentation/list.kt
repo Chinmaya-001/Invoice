@@ -76,7 +76,7 @@ fun InvoiceCard(
             .clickable(onClick = {
                 onView(invoiceWithItems.invoice.invoiceId)
             }),
-        elevation = CardDefaults.cardElevation()
+        elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(
             modifier = Modifier
@@ -86,7 +86,7 @@ fun InvoiceCard(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(modifier = Modifier) {
-                Text("Customer: ${invoiceWithItems.invoice.customerName}")
+                Text(invoiceWithItems.invoice.customerName)
                 Text("Total: ₹${invoiceWithItems.invoice.totalAmount}")
             }
             Spacer(Modifier.width(80.dp))
