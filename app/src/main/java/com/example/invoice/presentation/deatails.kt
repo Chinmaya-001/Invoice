@@ -1,0 +1,50 @@
+package com.example.invoice.presentation
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.example.invoice.data.InvoiceViewModel
+import com.example.invoice.data.InvoiceWithItems
+
+@Composable
+fun InvoiceDetailScreen(invoiceId: Int, viewModel: InvoiceViewModel, onBack: () -> Unit) {
+    var invoiceWithItems by remember { mutableStateOf<InvoiceWithItems?>(null) }
+
+    LaunchedEffect(invoiceId) {
+        invoiceWithItems = viewModel.getInvoiceById(invoiceId)
+    }
+
+    invoiceWithItems?.let { data ->
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("Customer: ${data.invoice.customerName}", style = MaterialTheme.typography.titleLarge)
+            Text("Total Amount: \$${data.invoice.totalAmount}")
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Items:", style = MaterialTheme.typography.titleMedium)
+            data.items.forEach {
+                Text("${it.itemName}: ${it.itemQuantity} x \$${it.itemPrice} = \$${it.itemAmount}")
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = onBack) {
+                Text("Back")
+            }
+        }
+    } ?: Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator()
+    }
+}
